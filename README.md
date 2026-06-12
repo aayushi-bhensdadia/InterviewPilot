@@ -1,4 +1,4 @@
-# Interview Simulator
+# Interview Pilot
 
 A full-stack interview practice platform built with React, Vite, Node.js, and MongoDB.
 
