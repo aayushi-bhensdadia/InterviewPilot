@@ -1,29 +1,64 @@
 # Interview Simulator
 
-A full-stack interview practice application that creates mock interviews, lets users answer questions in a timed environment, evaluates responses, and stores results.
+A full-stack interview practice platform built with React, Vite, Node.js, and MongoDB.
+
+The application lets users sign up, create interview sessions, answer questions in a live interview room, evaluate responses, and review results.
+
+## Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Repository Structure](#repository-structure)
+- [Getting Started](#getting-started)
+- [Environment Variables](#environment-variables)
+- [API Overview](#api-overview)
+- [Available Pages](#available-pages)
+- [Development](#development)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Features
-- Create and manage mock interviews
-- Timed interview rooms with question navigation
-- Automatic answer evaluation and results dashboard
-- User authentication and profile management
+
+- User registration, login, and authenticated sessions
+- Create and manage interview templates
+- Add questions to interviews
+- Real-time interview room experience
+- Submit answers and complete interviews
+- View interview results and score breakdown
+- Protected routes for dashboard, interview room, results, and profile
 
 ## Tech Stack
-- Backend: Node.js, Express, MongoDB (Mongoose)
-- Frontend: React + Vite, Tailwind/DaisyUI
-- Auth: JSON Web Tokens
+
+- Backend: Node.js, Express, MongoDB, Mongoose
+- Frontend: React, Vite, Tailwind CSS / DaisyUI
+- Authentication: JSON Web Tokens (JWT)
+- API client: Axios
 
 ## Repository Structure
 
-- `backend/` — Express API, models, controllers, routes
-- `frontend/` — React app and UI components
+- `backend/`
+  - `server.js` — Express server entry point
+  - `routes/` — API route definitions
+  - `controllers/` — Route handlers
+  - `models/` — Mongoose schemas
+  - `middleware/` — Auth middleware
+  - `config/` — Database connection logic
+- `frontend/`
+  - `src/` — React source code
+  - `src/pages/` — Application page views
+  - `src/components/` — Reusable UI components
+  - `src/services/api.js` — Axios API client
+  - `src/context/AuthContext.jsx` — Authentication state
 
-## Prerequisites
-- Node.js (v16+ recommended)
+## Getting Started
+
+### Prerequisites
+
+- Node.js 16+ installed
 - npm (or yarn)
 - MongoDB instance (local or hosted)
 
-## Backend Setup
+### Backend Setup
 
 1. Open a terminal in the `backend` folder.
 2. Install dependencies:
@@ -33,29 +68,24 @@ cd backend
 npm install
 ```
 
-3. Create a `.env` file (copy from `.env.example` if present) and set the MongoDB connection string and any JWT secrets:
+3. Create a `.env` file in `backend/`.
+4. Add the required values:
 
-```
+```env
 PORT=5000
 MONGO_URI=your_mongo_connection_string
 JWT_SECRET=your_jwt_secret
 ```
 
-4. Run the server in development:
+5. Start the backend server:
 
 ```bash
 npm run dev
 ```
 
-Or start the production server:
+The backend listens on the port defined in `PORT`, defaulting to `5000`.
 
-```bash
-npm start
-```
-
-The backend runs on the port defined in the environment (default `5000`). The backend scripts are defined in `backend/package.json` (`dev` uses `nodemon`, `start` runs `node server.js`).
-
-## Frontend Setup
+### Frontend Setup
 
 1. Open a terminal in the `frontend` folder.
 2. Install dependencies:
@@ -65,37 +95,67 @@ cd frontend
 npm install
 ```
 
-3. Create a `.env` file if needed (refer to `frontend/.env.example`), then run the dev server:
+3. If needed, copy `frontend/.env.example` to `frontend/.env` and configure `VITE_API_URL`.
+4. Run the frontend app:
 
 ```bash
 npm run dev
 ```
 
-4. Build for production:
+The frontend runs on `http://localhost:5173` by default.
 
-```bash
-npm run build
-```
+## Environment Variables
 
-The frontend uses Vite and serves on `http://localhost:5173` by default.
+### Backend (`backend/.env`)
 
-## Important Files
-- `backend/server.js` — Backend entrypoint
-- `frontend/src/App.jsx` — Frontend entrypoint
-- `frontend/.env.example` — Example frontend environment variables
+- `PORT` — Backend server port
+- `MONGO_URI` — MongoDB connection string
+- `JWT_SECRET` — Secret key for signing JWT tokens
 
-## API & Environment
-The app expects typical REST endpoints for auth, interviews, questions, and results. Configure `MONGO_URI` and `JWT_SECRET` in the backend `.env` and any frontend API base URL in `frontend/.env`.
+### Frontend (`frontend/.env`)
 
-## Development Tips
-- Run backend and frontend concurrently in separate terminals.
-- Use Postman or similar to exercise API routes.
+- `VITE_API_URL` — Optional API base URL (defaults to `http://localhost:5000/api`)
+
+## API Overview
+
+The backend exposes the following API paths:
+
+- `POST /api/users/signup` — Register a new user
+- `POST /api/users/login` — Authenticate user and return JWT
+- `GET /api/users/profile` — Get current user profile
+- `POST /api/interviews` — Create a new interview
+- `GET /api/interviews` — Get interviews for current user
+- `GET /api/interviews/:id` — Get interview details
+- `POST /api/interviews/:id/answer` — Submit an interview answer
+- `POST /api/interviews/:id/complete` — Complete the interview
+- `POST /api/questions` — Create a question for an interview
+- `GET /api/questions/interview/:interviewId` — Get questions for an interview
+- `GET /api/results/:interviewId` — Get results for an interview
+
+## Available Pages
+
+- `/` — Login page
+- `/signup` — Signup page
+- `/dashboard` — User dashboard
+- `/createInterview` — Create a new interview
+- `/interview/:id` — Interview room
+- `/results/:id` — Interview results
+- `/profile` — User profile
+
+## Development
+
+- Run backend and frontend in separate terminals.
+- Use the frontend proxy or set `VITE_API_URL` when the backend is on a different port.
+- Test API routes with a tool like Postman if needed.
 
 ## Contributing
-- Open issues or PRs with feature requests or bug fixes.
+
+Contributions are welcome.
+
+1. Fork the repository
+2. Create a new branch
+3. Open a pull request with a summary of changes
 
 ## License
-This project does not include a license file. Add one if you plan to open-source it.
 
----
-Created for the Interview Simulator project.
+This repository does not include a license file. Add one before publishing or sharing the project.
