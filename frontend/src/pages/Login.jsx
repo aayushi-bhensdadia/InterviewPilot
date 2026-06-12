@@ -46,7 +46,7 @@ function Login() {
       <div className="card bg-base-100 w-full max-w-md shadow-xl">
         <div className="card-body gap-5">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-primary">🧠 InterviewAI</h1>
+            <h1 className="text-3xl font-bold text-primary">🧠 interviewPilot</h1>
             <p className="text-base-content/60 text-sm mt-1">
               Adaptive technical mock interviews
             </p>

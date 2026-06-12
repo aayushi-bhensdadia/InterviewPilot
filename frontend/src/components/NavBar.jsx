@@ -20,7 +20,7 @@ function NavBar() {
           className="btn btn-ghost text-xl font-bold text-primary"
           onClick={() => navigate("/dashboard")}
         >
-          🧠 InterviewAI
+          🧠 interviewPilot
         </button>
       </div>
 
