@@ -21,8 +21,15 @@ async function startServer() {
     "http://localhost:3000",
   ];
 
+  console.log("CLIENT_URL:", process.env.CLIENT_URL);
+
+  app.use((req, res, next) => {
+    console.log("Origin:", req.headers.origin);
+    next();
+  });
+
   app.use(cors({
-    origin: allowedOrigins,
+    origin: true,
     credentials: true,
   }));
   app.use(express.json({ limit: "5mb" }));
