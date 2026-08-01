@@ -20,7 +20,6 @@ export const registerUser = async (req, res) => {
             _id: user._id,
             name: user.name,
             email: user.email,
-            password: user.password,
             createdAt: user.createdAt,  
             updatedAt: user.updatedAt
         });

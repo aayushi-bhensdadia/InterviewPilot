@@ -21,15 +21,13 @@ async function startServer() {
     "http://localhost:3000",
   ];
 
-  console.log("CLIENT_URL:", process.env.CLIENT_URL);
-
-  app.use((req, res, next) => {
-    console.log("Origin:", req.headers.origin);
-    next();
-  });
-
   app.use(cors({
-    origin: true,
+    origin: (origin, callback) => {
+      // Allow same-origin/non-browser requests (no Origin header)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   }));
   app.use(express.json({ limit: "5mb" }));
